@@ -1,0 +1,39 @@
+
+
+import React from 'react';
+import { View, Text, Linking, Platform TouchableOpacity } from 'react-native';
+
+export default class App extends React.Component {
+  //opens phone app
+  dialCall(number) { 
+    let phoneNumber = '';
+    if (Platform.OS === 'android') {
+      phoneNumber = `tel:${number}`;
+    }
+    else {
+      phoneNumber = `telprompt:${number}`;
+    }
+    Linking.openURL(phoneNumber);
+  }
+
+  //opens email app
+  openEmail(email) {
+    Linking.openURL(`mailto:${email}`)
+  }
+
+  render() {
+    return (
+      <View style={{flex:1}}>
+        <TouchableOpacity style={styles.phoneStyle} onPress={() => this.dialCall(98XXXXXXXX)}>
+          <Text style={textStyle}>Call us</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.openEmail('example@email.com')}>
+          <Text style={textStyle}>Email us</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
+
+
