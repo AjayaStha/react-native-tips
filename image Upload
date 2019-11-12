@@ -1,0 +1,54 @@
+handleUploadPhoto = async () => {
+    
+    console.warn('1')
+    const file = {
+    	uri: URI,
+     	type: 'image/jpeg',
+      	name: 'photo.jpg',
+     }
+    const imageData = new FormData();
+    
+    imageData.append('uploads[]', file)
+
+    //for multiple image upload
+    //const imageData = new FormData();
+    //ARRAY_OF_IMAGES.forEach((element, i) => {
+    // const newFile = {
+        // uri: element.uri,
+        //type: 'image/jpeg',
+        // name: `photo${i}.jpg`,
+      // }
+    //imageData.append('uploads[]', newFile)
+  // })
+
+    fetch("API_URL", {
+      method: 'post',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer TOKEN' },
+      body: imageData
+    }).then(async response => await response.json())
+      .then(async response => {
+        console.warn("upload success", response);
+      })
+      .catch(error => {
+        console.warn("upload error", error);
+        alert("Upload failed!");
+      });
+
+  }
+
+  //using axios
+  // try {
+    //const token = await AsyncStorage.getItem("token");
+    //const res = await axios.post('API_URL', imageData, {
+    //  headers: {
+    //    'Content-Type': 'multipart/form-data',
+    //     'Authorization': 'Bearer TOKEN'
+    //     },
+    //   })
+    // console.warn('res', res)
+    // }
+    // catch (e) {
+    //   console.warn('e', e)
+    // }
