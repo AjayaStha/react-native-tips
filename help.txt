@@ -29,12 +29,6 @@ android build(inside android folder) ->
 ./gradlew assembleRelease 
 
 
-student pin code for k-app parent => RCZQFSTV
-
-credentials for k-app teacher
-email => bikash.suwal01@gmail.com
-password => bikash#01
-
 If control save does not work properly and also reload does not show the saved changes, then delete the index.lock file in .git directory.
 
 
