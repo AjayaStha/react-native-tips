@@ -1,0 +1,99 @@
+ Help
+ (node install) 
+ https://github.com/nodesource/distributions/blob/master/README.md
+
+ (chrome browser not working)
+ rm -rf ~/.config/google-chrome
+
+(watchman error)
+watchman watch-del-all && rm -rf tmp/haste-map-react-native-packager && rm -rf node_modules && npm install npm start --reset-cache
+
+watchman watch-del-all
+rm -rf node_modules && npm install
+
+
+(release apk changes not seen)
+react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+
+(port already in use error)
+(Error: listen EADDRINUSE: address already in use :::8081)
+lsof -i tcp:<8081>
+kill -9 <PID>
+
+
+android build(inside android folder) ->
+./gradlew assembleRelease 
+
+
+student pin code for k-app parent => RCZQFSTV
+
+credentials for k-app teacher
+email => bikash.suwal01@gmail.com
+password => bikash#01
+
+If control save does not work properly and also reload does not show the saved changes, then delete the index.lock file in .git directory.
+
+
+steps to generate apk
+
+1.You can generate a private signing key using keytool. On Windows keytool must be run from C:\Program Files\Java\jdkx.x.x_x\bin.
+
+keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
+2.Also we need to put that key in to our React Native application open your project root folder and change directory to,
+
+$ cd android/app
+
+3.Edit now android/gradle.properties file
+
+MYAPP_RELEASE_STORE_FILE=my-release-key.keystore MYAPP_RELEASE_KEY_ALIAS=my-key-alias MYAPP_RELEASE_STORE_PASSWORD=******
+MYAPP_RELEASE_KEY_PASSWORD=******
+
+Do not forget to replace ****** with your real store password and key password.
+
+4.Adding signing config to your app’s gradle config
+
+Open the android/app/build.gradle file.
+
+Add the SigninConfigs release and BuildTypes release as follow.
+
+Edit the file android/app/build.gradle in your project folder, and add the signing config,...
+android {
+    ...
+    defaultConfig { ... }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+    buildTypes {
+        release {
+            ...
+            signingConfig signingConfigs.release
+        }
+    }
+}
+...
+
+5.Everything is ready!
+
+Now lets create our Signed React-Native application APK! 😎
+
+$ cd android 
+$ ./gradlew assembleRelease
+
+6.go to android/app/builds/outputs/apk/release/
+
+
+//file upload
+ uri: Platform.OS === "android" ? this.state.photo.uri : this.state.photo.uri.replace("file://", ""),
+
