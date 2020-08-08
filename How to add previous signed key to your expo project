@@ -1,0 +1,32 @@
+So the expo app that you are working on has already been publlished to the Google Play store by the previous developer.
+
+And now you need to update the project and build the APK to be published to the Play Store.
+
+Things to do:
+1. Get the keystore (<name>.jks) file from the previous developer.
+The .jks file could be retrieved by (should be done to get the key by the previous developer): 
+expo fetch:android:keystore
+
+This will give the .jks file, Keystore password, Key alias and Key password.
+
+2. Put the keystore file (.jks) inside the root project folder.
+
+3. When you try to build apk, expo will ask you whether you want to upload your own keystore or want expo to build one for you.
+
+You need to build you apk with your previous key. So for that, take you want to upload your own keystore option.
+
+4. Give the path to the .jks file.
+If you have placed the .jks file in the root project,
+./<name>.jks
+
+5. You also need to have keystore password, key alias, and key password from the previous developer.
+The command prompt will ask you for keystore password, key alias and key password. Type those and your project will build successfully.
+
+6. If your project had already been published to the play store. And you had build the app previously just to test out with the credentials provided by expo, but now you need to build the project to be published into the Play Store, you can delete the previous credentials by passing -c to the build command.
+expo build:android -c
+
+This will ask you if you are sure you want to delete the credentias. Type yes.
+Then follow from step 1.
+
+If you are building the app for the first time, and the app has not been uploaded to the play store, you can let expo handle the generation of the keystore and keys password. (Just don't forget to get and save your credentials later)
+
